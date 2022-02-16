@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1>here are the results</h1>
+    <h1>Results</h1>
     <!-- <%= locals.movieList[0].title %> -->
     <% for (let i = 0; i < locals.movieList.length; i++) { %> 
         <h3>Title: <%= locals.movieList[i].title %> </h3>
         <h3>Popularity: <%= locals.movieList[i].popularity %> </h3>
         <h3>Date of release: <%= locals.movieList[i].release_date %> </h3>
+        <img src="<%= imageList[i] %>" alt="No available image">
         <br>
     <% } %>
 </body>
