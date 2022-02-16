@@ -17,16 +17,16 @@ app.get('/search', (req, res) => {
 
 app.post('/search', (req, res) => {
     let movieArray = []
+    let imageArray = []
     axios.get(`https://api.themoviedb.org/3/search/movie?api_key=cec31c74c7f891dd48edbd521e9c3f88&query=${req.body.movie}`)
         .then(axiosResults => {
-            
             let cnt = 0
             axiosResults.data.results.forEach(element => {
                 movieArray[cnt] = element
+                imageArray[cnt] = `https://image.tmdb.org/t/p/w600_and_h900_bestv2${element.poster_path}`
                 cnt++
             });
-            console.log(movieArray[0])
-            res.render('results.ejs', { movieList: movieArray })
+            res.render('results.ejs', { movieList: movieArray, imageList: imageArray })
         })
 })
 
