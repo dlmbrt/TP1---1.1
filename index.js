@@ -27,7 +27,8 @@ app.post('/search', (req, res) => {
                 imageArray[cnt] = `https://image.tmdb.org/t/p/w600_and_h900_bestv2${element.poster_path}`
                 cnt++
             });
-            console.log(axiosResults.data.total_results)
+            // console.log(axiosResults.data.total_results)
+            // console.log(req.body.movie)
             if (axiosResults.data.total_results !== 0) {
                 res.render('results.ejs',   { movieList: movieArray, 
                                             imageList: imageArray, 
@@ -35,12 +36,11 @@ app.post('/search', (req, res) => {
                                             totalResults: axiosResults.data.total_results
                                             })
             } 
-            else {
-                res.render('results.ejs', { totalResults: axiosResults.data.total_results })
-                // res.send('no such data')
+            else if (axiosResults.data.total_results === 0 || req.body.movie === ''){
+                res.render('results.ejs', { totalResults: 0 })
             }
         })
-        .catch(error => console.error(error))
+        .catch(error => res.render('results.ejs', { totalResults: 0 }))
 })
 
 
