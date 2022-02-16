@@ -20,14 +20,27 @@ app.post('/search', (req, res) => {
     let imageArray = []
     axios.get(`https://api.themoviedb.org/3/search/movie?api_key=cec31c74c7f891dd48edbd521e9c3f88&query=${req.body.movie}`)
         .then(axiosResults => {
+            
             let cnt = 0
             axiosResults.data.results.forEach(element => {
                 movieArray[cnt] = element
                 imageArray[cnt] = `https://image.tmdb.org/t/p/w600_and_h900_bestv2${element.poster_path}`
                 cnt++
             });
-            res.render('results.ejs', { movieList: movieArray, imageList: imageArray })
+            console.log(axiosResults.data.total_results)
+            if (axiosResults.data.total_results !== 0) {
+                res.render('results.ejs',   { movieList: movieArray, 
+                                            imageList: imageArray, 
+                                            searchWords: req.body.movie,
+                                            totalResults: axiosResults.data.total_results
+                                            })
+            } 
+            else {
+                res.render('results.ejs', { totalResults: axiosResults.data.total_results })
+                // res.send('no such data')
+            }
         })
+        .catch(error => console.error(error))
 })
 
 

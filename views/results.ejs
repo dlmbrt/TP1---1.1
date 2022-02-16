@@ -4,18 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>The Movie Database</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1>Results</h1>
-    <!-- <%= locals.movieList[0].title %> -->
-    <% for (let i = 0; i < locals.movieList.length; i++) { %> 
-        <h3>Title: <%= locals.movieList[i].title %> </h3>
-        <h3>Popularity: <%= locals.movieList[i].popularity %> </h3>
-        <h3>Date of release: <%= locals.movieList[i].release_date %> </h3>
-        <img src="<%= imageList[i] %>" alt="No available image">
+    <% if (totalResults !== 0) { %> 
+        <h1>Results for "<%= locals.searchWords %>"</h1>
+        <h3>Total results: <%= totalResults %> </h3>
         <br>
-    <% } %>
+        <!-- <%= locals.movieList[0].title %> -->
+        <% for (let i = 0; i < locals.movieList.length; i++) { %> 
+            <h3>Title: <%= locals.movieList[i].title %> </h3>
+            <h3>Popularity: <%= locals.movieList[i].popularity %> </h3>
+            <h3>Date of release: <%= locals.movieList[i].release_date %> </h3>
+            <img src="<%= imageList[i] %>" alt="No available image">
+            <br><br>
+        <% } %>
+    <% } else { %>
+        <h3>No such data, try again</h3>
+        <% } %>
+
+    <a href="/search">Back to search page</a>
 </body>
 </html>
