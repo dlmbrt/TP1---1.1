@@ -20,8 +20,6 @@ app.post('/search', (req, res) => {
     let imageArray = []
     let searchBox = req.body.movie
     let searchBoxValue = req.body.movie.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-    // searchBoxValue.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-    console.log(searchBoxValue)
     axios.get(`https://api.themoviedb.org/3/search/movie?api_key=cec31c74c7f891dd48edbd521e9c3f88&query=${searchBoxValue}`)
         .then(axiosResults => {
             
@@ -31,8 +29,6 @@ app.post('/search', (req, res) => {
                 imageArray[cnt] = `https://image.tmdb.org/t/p/w600_and_h900_bestv2${element.poster_path}`
                 cnt++
             });
-            // console.log(axiosResults.data.total_results)
-            // console.log(searchBoxValue)
             if (axiosResults.data.total_results !== 0) {
                 res.render('results.ejs',   { movieList: movieArray, 
                                             imageList: imageArray, 
@@ -46,6 +42,5 @@ app.post('/search', (req, res) => {
         })
         .catch(error => res.render('results.ejs', { totalResults: 0 }))
 })
-
 
 app.listen(3000)
