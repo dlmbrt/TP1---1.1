@@ -15,26 +15,26 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
         
             <% if (totalResults !== 0) { %> 
                 
-                    <h1 class="text-center p-3"> <%= totalResults %> Search Result <span style="color: gray">></span> "<%= locals.searchWords %>"</h1>
+                    <h2 class="text-center p-3"> <%= totalResults %> Search Result <span style="color: gray">></span> "<%= locals.searchWords %>"</h2>
                     <% for (let i = 0; i < locals.movieList.length; i++) { %> 
-                        <div class="row  border p-2 m-5 bg-light rounded">
-                            <img src="<%= imageList[i] %>" class="col-sm-3" alt="No available image">
+                        <div class="row  border p-2 m-5 bg-light rounded-3">
+                            <img src="<%= imageList[i] %>" class="col-md-3 p-0" style="height: 40vh" alt="No available image">
                             <div class="col-sm-9">
                                 
-                                <div class="border-bottom">
-                                    <h3>Title: <%= locals.movieList[i].title %> </h3>
+                                <div class="row border-bottom ">
+                                    <h2><%= locals.movieList[i].title %> </h2> 
                                 </div>
                                     
-                                <div class=" border-bottom">
-                                    <h3>Overview: <%=locals.movieList[i].overview  %> </h3>
+                                <div class="row border-bottom ">
+                                    <p class="m-0"><%=locals.movieList[i].overview  %></p>  
                                 </div>
                                 
-                                <div class="border-bottom">
-                                    <h3>Popularity: <%= locals.movieList[i].popularity %> </h3>
+                                <div class="row border-bottom ">
+                                    <p class="col-md-3 m-0"><b>Popularity:</b></p> <p class="col-md-3 m-0"><%= locals.movieList[i].popularity %> </p>
                                 </div>
 
-                                <div class="">
-                                    <h3>Date of release: <%= locals.movieList[i].release_date %> </h3>
+                                <div class="row ">
+                                    <p class="col-md-3 m-0"><b>Date of release:</b></p> <p class="col-md-3 m-0"><%= locals.movieList[i].release_date %> </p>
                                 </div>
                                     
                             </div>
