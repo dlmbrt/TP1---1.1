@@ -18,7 +18,11 @@ app.get('/search', (req, res) => {
 app.post('/search', (req, res) => {
     let movieArray = []
     let imageArray = []
-    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=cec31c74c7f891dd48edbd521e9c3f88&query=${req.body.movie}`)
+    let searchBox = req.body.movie
+    let searchBoxValue = req.body.movie.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    // searchBoxValue.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    console.log(searchBoxValue)
+    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=cec31c74c7f891dd48edbd521e9c3f88&query=${searchBoxValue}`)
         .then(axiosResults => {
             
             let cnt = 0
@@ -28,15 +32,15 @@ app.post('/search', (req, res) => {
                 cnt++
             });
             // console.log(axiosResults.data.total_results)
-            // console.log(req.body.movie)
+            // console.log(searchBoxValue)
             if (axiosResults.data.total_results !== 0) {
                 res.render('results.ejs',   { movieList: movieArray, 
                                             imageList: imageArray, 
-                                            searchWords: req.body.movie,
+                                            searchWords: searchBox,
                                             totalResults: axiosResults.data.total_results
                                             })
             } 
-            else if (axiosResults.data.total_results === 0 || req.body.movie === ''){
+            else if (axiosResults.data.total_results === 0 || searchBoxValue === ''){
                 res.render('results.ejs', { totalResults: 0 })
             }
         })
