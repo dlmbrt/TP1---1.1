@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Movie Database</title>
-    <!-- <link rel="stylesheet" href="/css/style.css"> -->
     <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
 integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -14,12 +13,15 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
     <div class="container-fluid bg-secondary">
         
             <% if (totalResults !== 0) { %> 
-                
-                    <h2 class="text-center p-3"> <%= totalResults %> Search Result For "<%= locals.searchWords %>"</h2>
+                    <div class="row">
+                        <div class="col-md-6 mx-auto">
+                            <h2 class="text-center p-3 bg-light rounded-3 mt-3"> <%= totalResults %> Search Result For "<%= locals.searchWords %>"</h2>
+                        </div>
+                    </div>
                     <% for (let i = 0; i < locals.movieList.length; i++) { %> 
                         <div class="row  border p-2 m-5 bg-light rounded-3">
                             <img src="<%= imageList[i] %>" class="col-md-2 p-0" style="height: 40vh" alt="No available image">
-                            <div class="col-sm-7">
+                            <div class="col-sm-10">
                                 
                                 <div class="row border-bottom ">
                                     <h2><%= locals.movieList[i].title %> </h2> 
@@ -30,30 +32,27 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                                 </div>
                                 
                                 <div class="row border-bottom ">
-                                    <p class="col-md-3 m-0"><b>Popularity:</b></p> <p class="col-md-3 m-0"><%= locals.movieList[i].popularity %> </p>
+                                    <p class="col-md-2 m-0"><b>Popularity:</b></p> <p class="col-md-2 m-0"><%= locals.movieList[i].popularity %> </p>
                                 </div>
 
                                 <div class="row ">
-                                    <p class="col-md-3 m-0"><b>Date of release:</b></p> <p class="col-md-3 m-0"><%= locals.movieList[i].release_date %> </p>
+                                    <p class="col-md-2 m-0"><b>Date of release:</b></p> <p class="col-md-2 m-0"><%= locals.movieList[i].release_date %> </p>
                                 </div>
                                     
                             </div>
                         </div>
                     <% } %>
                     <div class="text-center p-3">
-                        <a href="/search" class="">Back to search page</a>
+                        <a href="/search" class="text-dark">Back to search page</a>
                     </div>
             <% } else { %>
                 <div class="row align-items-center text-center" style="height: 100vh">
                     <div>
-                        <h3 class="" >No such data, please try again</h3>
-                        <a href="/search" class="">Back to search page</a>
+                        <h3 class="" >No result found, please try again</h3>
+                        <a href="/search" class="text-dark">Back to search page</a>
                     </div>
                 </div>
                 <% } %>
-                <!-- <div class="text-center p-3">
-                    <a href="/search" class="mx-auto">Back to search page</a>
-                </div> -->
     </div>
 </body>
 <!-- JavaScript Bundle with Popper -->
