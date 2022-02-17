@@ -18,20 +18,25 @@ app.get('/search', (req, res) => {
 app.post('/search', (req, res) => {
     let movieArray = []
     let imageArray = []
+    let voteAverageArray = []
+    let originalLanguageArray = []
     let searchBox = req.body.movie
     let searchBoxValue = req.body.movie.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     axios.get(`https://api.themoviedb.org/3/search/movie?api_key=cec31c74c7f891dd48edbd521e9c3f88&query=${searchBoxValue}`)
         .then(axiosResults => {
-            
             let cnt = 0
+            console.log(axiosResults.data.results)
             axiosResults.data.results.forEach(element => {
                 movieArray[cnt] = element
-                imageArray[cnt] = `https://image.tmdb.org/t/p/w600_and_h900_bestv2${element.poster_path}`
+                if (element.poster_path === null) {imageArray[cnt] = '/img/noPreview.svg'} else {
+                imageArray[cnt] = `https://image.tmdb.org/t/p/w600_and_h900_bestv2${element.poster_path}`}
                 cnt++
             });
             if (axiosResults.data.total_results !== 0) {
                 res.render('results.ejs',   { movieList: movieArray, 
                                             imageList: imageArray, 
+                                            voteAverageList: voteAverageArray,
+                                            originalLanguageList: originalLanguageArray,
                                             searchWords: searchBox,
                                             totalResults: axiosResults.data.total_results
                                             })

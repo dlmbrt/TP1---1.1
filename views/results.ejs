@@ -11,17 +11,17 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 </head>
 <body>
     <div class="container-fluid bg-secondary">
-        
+        <div class="col-md-8 mx-auto">
             <% if (totalResults !== 0) { %> 
                     <div class="row">
-                        <div class="col-md-6 mx-auto">
-                            <h2 class="text-center p-3 bg-light rounded-3 mt-3"> <%= totalResults %> Search Result For "<%= locals.searchWords %>"</h2>
+                        <div class="">
+                            <h2 class="text-center rounded-3 "> <%= totalResults %> Search Result For "<%= locals.searchWords %>"</h2>
                         </div>
                     </div>
                     <% for (let i = 0; i < locals.movieList.length; i++) { %> 
-                        <div class="row  border p-2 m-5 bg-light rounded-3">
-                            <img src="<%= imageList[i] %>" class="col-md-2 p-0" style="height: 40vh" alt="No available image">
-                            <div class="col-sm-10">
+                        <div class="row  border p-2 mx-5 mb-4 bg-light rounded-3">
+                            <img src="<%= imageList[i] %>" class="col-md-2 p-2" style="height: 40vh; width: 12vw;" alt="No poster found">
+                            <div class="col-sm-8">
                                 
                                 <div class="row border-bottom ">
                                     <h2><%= locals.movieList[i].title %> </h2> 
@@ -32,11 +32,19 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                                 </div>
                                 
                                 <div class="row border-bottom ">
-                                    <p class="col-md-2 m-0"><b>Popularity:</b></p> <p class="col-md-2 m-0"><%= locals.movieList[i].popularity %> </p>
+                                    <p class="col-md-3 m-0"><b>Popularity:</b></p> <p class="col-md-3 m-0"><%= locals.movieList[i].popularity %> </p>
+                                </div>
+
+                                <div class="row border-bottom ">
+                                    <p class="col-md-3 m-0"><b>Vote Average:</b></p> <p class="col-md-3 m-0"><%= locals.movieList[i].vote_average %> </p>
+                                </div>
+
+                                <div class="row border-bottom ">
+                                    <p class="col-md-3 m-0"><b>Language:</b></p> <p class="col-md-3 m-0"><%= locals.movieList[i].original_language %> </p>
                                 </div>
 
                                 <div class="row ">
-                                    <p class="col-md-2 m-0"><b>Date of release:</b></p> <p class="col-md-2 m-0"><%= locals.movieList[i].release_date %> </p>
+                                    <p class="col-md-3 m-0"><b>Date of release:</b></p> <p class="col-md-3 m-0"><%= locals.movieList[i].release_date %> </p>
                                 </div>
                                     
                             </div>
@@ -53,6 +61,7 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                     </div>
                 </div>
                 <% } %>
+            </div>        
     </div>
 </body>
 <!-- JavaScript Bundle with Popper -->
