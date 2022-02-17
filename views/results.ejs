@@ -11,15 +11,15 @@
 integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container">
+    <div class="container-fluid bg-secondary">
         
             <% if (totalResults !== 0) { %> 
                 
-                    <h2 class="text-center p-3"> <%= totalResults %> Search Result <span style="color: gray">></span> "<%= locals.searchWords %>"</h2>
+                    <h2 class="text-center p-3"> <%= totalResults %> Search Result For "<%= locals.searchWords %>"</h2>
                     <% for (let i = 0; i < locals.movieList.length; i++) { %> 
                         <div class="row  border p-2 m-5 bg-light rounded-3">
-                            <img src="<%= imageList[i] %>" class="col-md-3 p-0" style="height: 40vh" alt="No available image">
-                            <div class="col-sm-9">
+                            <img src="<%= imageList[i] %>" class="col-md-2 p-0" style="height: 40vh" alt="No available image">
+                            <div class="col-sm-7">
                                 
                                 <div class="row border-bottom ">
                                     <h2><%= locals.movieList[i].title %> </h2> 
@@ -40,13 +40,20 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
                             </div>
                         </div>
                     <% } %>
+                    <div class="text-center p-3">
+                        <a href="/search" class="">Back to search page</a>
+                    </div>
             <% } else { %>
-
-                <h3>No such data, please try again</h3>
-                <% } %>
-                <div class="text-center p-3">
-                    <a href="/search" class="mx-auto">Back to search page</a>
+                <div class="row align-items-center text-center" style="height: 100vh">
+                    <div>
+                        <h3 class="" >No such data, please try again</h3>
+                        <a href="/search" class="">Back to search page</a>
+                    </div>
                 </div>
+                <% } %>
+                <!-- <div class="text-center p-3">
+                    <a href="/search" class="mx-auto">Back to search page</a>
+                </div> -->
     </div>
 </body>
 <!-- JavaScript Bundle with Popper -->
